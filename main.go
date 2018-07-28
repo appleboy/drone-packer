@@ -50,6 +50,11 @@ func main() {
 			Usage:  "Will execute multiple builds in parallel as defined in the template",
 			EnvVar: "PLUGIN_TEMPLATE",
 		},
+		cli.BoolFlag{
+			Name:   "syntax_only",
+			Usage:  "Only check syntax. Do not verify config of the template",
+			EnvVar: "PLUGIN_SYNTAX_ONLY",
+		},
 	}
 
 	app.Version = Version
@@ -83,12 +88,13 @@ func run(c *cli.Context) error {
 
 	plugin := Plugin{
 		Config: Config{
-			Actions:  c.StringSlice("actions"),
-			Vars:     vars,
-			Template: c.String("template"),
-			VarFiles: c.StringSlice("var_files"),
-			Except:   c.StringSlice("except"),
-			Only:     c.StringSlice("only"),
+			Actions:    c.StringSlice("actions"),
+			Vars:       vars,
+			Template:   c.String("template"),
+			VarFiles:   c.StringSlice("var_files"),
+			Except:     c.StringSlice("except"),
+			Only:       c.StringSlice("only"),
+			SyntaxOnly: c.Bool("syntax_only"),
 		},
 	}
 

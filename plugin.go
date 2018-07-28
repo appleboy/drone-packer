@@ -74,7 +74,6 @@ func (p *Plugin) Exec() error {
 
 	commands = append(commands, exec.Command("packer", "version"))
 
-	logrus.Println(p.Config.Actions)
 	// Add commands listed from Actions
 	for _, action := range p.Config.Actions {
 		switch action {
