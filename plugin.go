@@ -24,6 +24,7 @@ type (
 		Debug      bool
 		Parallel   bool
 		Readable   bool
+		Force      bool
 	}
 
 	// Plugin values
@@ -101,6 +102,10 @@ func pkBuild(config Config) *exec.Cmd {
 
 	if config.Readable {
 		args = append(args, "-machine-readable")
+	}
+
+	if config.Force {
+		args = append(args, "-force")
 	}
 
 	args = append(args, config.Template)

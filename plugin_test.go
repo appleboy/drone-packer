@@ -113,6 +113,16 @@ func Test_pkBuild(t *testing.T) {
 			},
 			want: exec.Command("packer", "build", "-machine-readable", "foo.json"),
 		},
+		{
+			name: "add force flag",
+			args: args{
+				config: Config{
+					Template: "foo.json",
+					Force:    true,
+				},
+			},
+			want: exec.Command("packer", "build", "-force", "foo.json"),
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

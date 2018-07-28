@@ -75,6 +75,11 @@ func main() {
 			Usage:  "Machine-readable output",
 			EnvVar: "PLUGIN_READABLE",
 		},
+		cli.BoolFlag{
+			Name:   "force",
+			Usage:  "Force a build to continue if artifacts exist, deletes existing artifacts",
+			EnvVar: "PLUGIN_FORCE",
+		},
 	}
 
 	app.Version = Version
@@ -119,6 +124,7 @@ func run(c *cli.Context) error {
 			Debug:      c.Bool("debug"),
 			Parallel:   c.Bool("parallel"),
 			Readable:   c.Bool("readable"),
+			Force:      c.Bool("force"),
 		},
 	}
 
