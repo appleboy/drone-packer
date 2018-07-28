@@ -3,10 +3,34 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "aB+ZDcX9agmLOO+/dKINbhbCbsg=",
+			"path": "github.com/sirupsen/logrus",
+			"revision": "c108f5553c369120b773da633aca62a8b42b1cf4",
+			"revisionTime": "2018-07-23T11:49:25Z"
+		},
+		{
 			"checksumSHA1": "9/2qvuFPQxW7ZXzQSOYwqZb5cNg=",
 			"path": "github.com/urfave/cli",
 			"revision": "8e01ec4cd3e2d84ab2fe90d8210528ffbb06d8ff",
 			"revisionTime": "2018-02-26T03:02:53Z"
+		},
+		{
+			"checksumSHA1": "BGm8lKZmvJbf/YOJLeL1rw2WVjA=",
+			"path": "golang.org/x/crypto/ssh/terminal",
+			"revision": "c126467f60eb25f8f27e5a981f32a87e3965053f",
+			"revisionTime": "2018-07-23T15:26:11Z"
+		},
+		{
+			"checksumSHA1": "YVhxr50aj4r9QjM4CY52K45XOJY=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "bd9dbc187b6e1dacfdd2722a87e83093c2d7bd6e",
+			"revisionTime": "2018-07-27T21:32:08Z"
+		},
+		{
+			"checksumSHA1": "k3aXicSfO+3+JmTNstuZrsTCRyI=",
+			"path": "golang.org/x/sys/windows",
+			"revision": "bd9dbc187b6e1dacfdd2722a87e83093c2d7bd6e",
+			"revisionTime": "2018-07-27T21:32:08Z"
 		}
 	],
 	"rootPath": "github.com/appleboy/drone-packer"
