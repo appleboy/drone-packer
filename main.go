@@ -63,7 +63,7 @@ func main() {
 		cli.BoolFlag{
 			Name:   "debug",
 			Usage:  "Debug mode enabled for builds",
-			EnvVar: "PLUGIN_SYNTAX_ONLY",
+			EnvVar: "PLUGIN_DEBUG",
 		},
 		cli.BoolFlag{
 			Name:   "parallel",
