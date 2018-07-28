@@ -133,12 +133,11 @@ func (p *Plugin) Exec() error {
 	for _, c := range commands {
 		c.Stdout = os.Stdout
 		c.Stderr = os.Stderr
+		c.Env = os.Environ()
 
 		err := c.Run()
 		if err != nil {
-			logrus.WithFields(logrus.Fields{
-				"error": err,
-			}).Fatal("Failed to execute a command")
+			return err
 		}
 		logrus.Debug("Command completed successfully")
 	}
