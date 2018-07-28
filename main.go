@@ -55,6 +55,21 @@ func main() {
 			Usage:  "Only check syntax. Do not verify config of the template",
 			EnvVar: "PLUGIN_SYNTAX_ONLY",
 		},
+		cli.BoolFlag{
+			Name:   "color",
+			Usage:  "Disable color output (on by default)",
+			EnvVar: "PLUGIN_COLOR",
+		},
+		cli.BoolFlag{
+			Name:   "debug",
+			Usage:  "Debug mode enabled for builds",
+			EnvVar: "PLUGIN_SYNTAX_ONLY",
+		},
+		cli.BoolFlag{
+			Name:   "parallel",
+			Usage:  "Disable parallelization (on by default)",
+			EnvVar: "PLUGIN_PARALLEL",
+		},
 	}
 
 	app.Version = Version
@@ -95,6 +110,9 @@ func run(c *cli.Context) error {
 			Except:     c.StringSlice("except"),
 			Only:       c.StringSlice("only"),
 			SyntaxOnly: c.Bool("syntax_only"),
+			Color:      c.Bool("color"),
+			Debug:      c.Bool("debug"),
+			Parallel:   c.Bool("parallel"),
 		},
 	}
 

@@ -20,6 +20,9 @@ type (
 		SyntaxOnly bool
 		Except     []string
 		Only       []string
+		Color      bool
+		Debug      bool
+		Parallel   bool
 	}
 
 	// Plugin values
@@ -61,6 +64,47 @@ func pkValidate(config Config) *exec.Cmd {
 	)
 }
 
+func pkBuild(config Config) *exec.Cmd {
+	args := []string{
+		"build",
+	}
+
+	for _, v := range config.VarFiles {
+		args = append(args, "-var-file", fmt.Sprintf("%s", v))
+	}
+
+	for k, v := range config.Vars {
+		args = append(args, "-var")
+		args = append(args, fmt.Sprintf("%s=%s", k, v))
+	}
+
+	if len(config.Except) > 0 {
+		args = append(args, "-except="+strings.Join(config.Except, ","))
+	}
+
+	if len(config.Only) > 0 {
+		args = append(args, "-only="+strings.Join(config.Only, ","))
+	}
+
+	if config.Parallel {
+		args = append(args, "-parallel=true")
+	}
+
+	if config.Color {
+		args = append(args, "-color=true")
+	}
+
+	if config.Debug {
+		args = append(args, "-debug")
+	}
+
+	args = append(args, config.Template)
+	return exec.Command(
+		"packer",
+		args...,
+	)
+}
+
 // Exec executes the plugin.
 func (p *Plugin) Exec() error {
 	var commands []*exec.Cmd
@@ -79,6 +123,8 @@ func (p *Plugin) Exec() error {
 		switch action {
 		case "validate":
 			commands = append(commands, pkValidate(p.Config))
+		case "build":
+			commands = append(commands, pkBuild(p.Config))
 		default:
 			return fmt.Errorf("valid actions are: validate, build  You provided %s", action)
 		}
