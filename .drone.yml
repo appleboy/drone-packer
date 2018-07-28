@@ -45,3 +45,22 @@ pipeline:
     group: build
     commands:
       - make build_linux_arm
+
+  publish_linux_amd64:
+    image: plugins/docker:17.05
+    pull: true
+    secrets: [ docker_username, docker_password ]
+    group: release
+    repo: ${DRONE_REPO}
+    auto_tag: true
+    dockerfile: Dockerfile
+    when:
+      event: [ push, tag ]
+      local: false
+
+  discord:
+    image: appleboy/drone-discord
+    pull: true
+    secrets: [ discord_webhook_id, discord_webhook_token ]
+    when:
+      status: [ success, failure ]
