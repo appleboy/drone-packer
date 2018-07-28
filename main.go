@@ -70,6 +70,11 @@ func main() {
 			Usage:  "Disable parallelization (on by default)",
 			EnvVar: "PLUGIN_PARALLEL",
 		},
+		cli.BoolFlag{
+			Name:   "readable",
+			Usage:  "Machine-readable output",
+			EnvVar: "PLUGIN_READABLE",
+		},
 	}
 
 	app.Version = Version
@@ -113,6 +118,7 @@ func run(c *cli.Context) error {
 			Color:      c.Bool("color"),
 			Debug:      c.Bool("debug"),
 			Parallel:   c.Bool("parallel"),
+			Readable:   c.Bool("readable"),
 		},
 	}
 

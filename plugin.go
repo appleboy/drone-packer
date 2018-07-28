@@ -23,6 +23,7 @@ type (
 		Color      bool
 		Debug      bool
 		Parallel   bool
+		Readable   bool
 	}
 
 	// Plugin values
@@ -96,6 +97,10 @@ func pkBuild(config Config) *exec.Cmd {
 
 	if config.Debug {
 		args = append(args, "-debug")
+	}
+
+	if config.Readable {
+		args = append(args, "-machine-readable")
 	}
 
 	args = append(args, config.Template)

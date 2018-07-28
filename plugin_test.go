@@ -103,6 +103,16 @@ func Test_pkBuild(t *testing.T) {
 			},
 			want: exec.Command("packer", "build", "-parallel=true", "-color=true", "-debug", "foo.json"),
 		},
+		{
+			name: "add machine readable flag",
+			args: args{
+				config: Config{
+					Template: "foo.json",
+					Readable: true,
+				},
+			},
+			want: exec.Command("packer", "build", "-machine-readable", "foo.json"),
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
