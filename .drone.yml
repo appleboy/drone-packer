@@ -1,0 +1,47 @@
+workspace:
+  base: /go/src
+  path: github.com/appleboy/drone-packer
+
+clone:
+  git:
+    image: plugins/git
+    depth: 50
+    tags: true
+
+pipeline:
+  lint:
+    image: golang:1.10
+    pull: true
+    commands:
+      - make vet
+      - make lint
+      - make test-vendor
+      - make misspell-check
+
+ build_linux_amd64:
+    image: golang:1.10
+    pull: true
+    group: build
+    commands:
+      - make build_linux_amd64
+
+  build_linux_i386:
+    image: golang:1.10
+    pull: true
+    group: build
+    commands:
+      - make build_linux_i386
+
+  build_linux_arm64:
+    image: golang:1.10
+    pull: true
+    group: build
+    commands:
+      - make build_linux_arm64
+
+  build_linux_arm:
+    image: golang:1.10
+    pull: true
+    group: build
+    commands:
+      - make build_linux_arm
