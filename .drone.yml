@@ -18,7 +18,7 @@ pipeline:
       - make test-vendor
       - make misspell-check
 
- build_linux_amd64:
+  build_linux_amd64:
     image: golang:1.10
     pull: true
     group: build
