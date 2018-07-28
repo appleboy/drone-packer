@@ -16,6 +16,8 @@ LABEL maintainer="Bo-Yi Wu <appleboy.tw@gmail.com>" \
   org.label-schema.vendor="Bo-Yi Wu" \
   org.label-schema.schema-version="1.0"
 
+ENV PACKER_LOG 0
+
 COPY --from=builder bin/packer /bin/
 ADD release/linux/amd64/drone-packer /bin/
 ENTRYPOINT ["/bin/drone-packer"]
