@@ -19,6 +19,14 @@ pipeline:
       - make misspell-check
       - make test
 
+  codecov:
+    image: robertstettner/drone-codecov
+    secrets: [ codecov_token ]
+    files:
+      - coverage.txt
+    when:
+      event: [ push, pull_request ]
+
   build_linux_amd64:
     image: golang:1.10
     pull: true
