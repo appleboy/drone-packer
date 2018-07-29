@@ -35,7 +35,7 @@ func Test_pkValidate(t *testing.T) {
 					VarFiles: []string{"bar.json"},
 				},
 			},
-			want: exec.Command("packer", "validate", "-var-file", "bar.json", "-var", "foo=bar", "foo.json"),
+			want: exec.Command("packer", "validate", "-var-file=bar.json", "-var", "foo=bar", "foo.json"),
 		},
 		{
 			name: "add except only color flag",
@@ -89,7 +89,7 @@ func Test_pkBuild(t *testing.T) {
 					VarFiles: []string{"bar.json"},
 				},
 			},
-			want: exec.Command("packer", "build", "-var-file", "bar.json", "-var", "foo=bar", "foo.json"),
+			want: exec.Command("packer", "build", "-var-file=bar.json", "-var", "foo=bar", "foo.json"),
 		},
 		{
 			name: "add Parallel, Color and debug flag",
