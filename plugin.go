@@ -43,8 +43,7 @@ func pkValidate(config Config) *exec.Cmd {
 	}
 
 	for k, v := range config.Vars {
-		args = append(args, "-var")
-		args = append(args, fmt.Sprintf("%s=%s", k, v))
+		args = append(args, "-var", fmt.Sprintf("%s=%s", k, v))
 	}
 
 	if len(config.Except) > 0 {
@@ -76,8 +75,7 @@ func pkBuild(config Config) *exec.Cmd {
 	}
 
 	for k, v := range config.Vars {
-		args = append(args, "-var")
-		args = append(args, fmt.Sprintf("%s=%s", k, v))
+		args = append(args, "-var", fmt.Sprintf("%s=%s", k, v))
 	}
 
 	if len(config.Except) > 0 {
