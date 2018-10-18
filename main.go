@@ -89,7 +89,7 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		log.Fatal().Err(err).Msg("app can't rum")
+		log.Fatal().Err(err).Msg("can't start app")
 	}
 }
 
