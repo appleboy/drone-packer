@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/sirupsen/logrus"
+	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli"
 )
 
@@ -89,7 +89,7 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		logrus.Fatal(err)
+		log.Fatal().Err(err).Msg("app can't rum")
 	}
 }
 
@@ -100,14 +100,12 @@ func run(c *cli.Context) error {
 	} else {
 		version = Version
 	}
-	logrus.WithFields(logrus.Fields{
-		"revision": version,
-	}).Info("Drone Packer Plugin Version")
+	log.Info().Str("revision", version).Msg("Drone Packer Plugin Version")
 
 	var vars map[string]string
 	if c.String("vars") != "" {
 		if err := json.Unmarshal([]byte(c.String("vars")), &vars); err != nil {
-			logrus.Panic(err)
+			log.Fatal().Err(err).Msg("json unmarshal")
 		}
 	}
 

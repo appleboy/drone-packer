@@ -6,8 +6,6 @@ import (
 	"os"
 	"os/exec"
 	"strings"
-
-	"github.com/sirupsen/logrus"
 )
 
 type (
@@ -147,7 +145,6 @@ func (p *Plugin) Exec() error {
 		if err != nil {
 			return err
 		}
-		logrus.Debug("Command completed successfully")
 	}
 
 	return nil

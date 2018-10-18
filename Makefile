@@ -151,7 +151,7 @@ coverage:
 
 clean:
 	$(GO) clean -x -i ./...
-	rm -rf coverage.txt $(EXECUTABLE) $(DIST) vendor
+	rm -rf coverage.txt $(EXECUTABLE) $(DIST)
 
 version:
 	@echo $(VERSION)
