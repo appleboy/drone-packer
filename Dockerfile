@@ -10,7 +10,8 @@ RUN apk add --no-cache ca-certificates \
   rm -rf /var/cache/apk/*
 
 ENV PACKER_VERSION 1.3.1
-RUN wget -q https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip -O packer.zip && \
+ENV PACKER_ARCH amd64
+RUN wget -q https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_${PACKER_ARCH}.zip -O packer.zip && \
   unzip packer.zip -d /bin && \
   rm -f packer.zip
 
