@@ -136,16 +136,21 @@ func (p *Plugin) Exec() error {
 		}
 	}
 
-	for _, c := range commands {
-		c.Stdout = os.Stdout
-		c.Stderr = os.Stderr
-		c.Env = os.Environ()
+	for _, cmd := range commands {
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Env = os.Environ()
 
-		err := c.Run()
-		if err != nil {
+		trace(cmd)
+
+		if err := cmd.Run(); err != nil {
 			return err
 		}
 	}
 
 	return nil
+}
+
+func trace(cmd *exec.Cmd) {
+	fmt.Println("$", strings.Join(cmd.Args, " "))
 }
