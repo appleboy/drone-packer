@@ -93,6 +93,19 @@ pipeline:
       event: [ push, tag ]
       local: false
 
+  publish_linux_i386:
+    image: plugins/docker:17.05
+    pull: true
+    secrets: [ docker_username, docker_password ]
+    group: release
+    repo: ${DRONE_REPO}
+    auto_tag: true
+    auto_tag_suffix: i386
+    dockerfile: Dockerfile.i386
+    when:
+      event: [ push, tag ]
+      local: false
+
   discord:
     image: appleboy/drone-discord
     pull: true
