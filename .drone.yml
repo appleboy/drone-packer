@@ -74,7 +74,21 @@ pipeline:
     group: release
     repo: ${DRONE_REPO}
     auto_tag: true
+    auto_tag_suffix: arm
     dockerfile: Dockerfile.arm
+    when:
+      event: [ push, tag ]
+      local: false
+
+  publish_linux_arm64:
+    image: plugins/docker:17.05
+    pull: true
+    secrets: [ docker_username, docker_password ]
+    group: release
+    repo: ${DRONE_REPO}
+    auto_tag: true
+    auto_tag_suffix: arm64
+    dockerfile: Dockerfile.arm64
     when:
       event: [ push, tag ]
       local: false
