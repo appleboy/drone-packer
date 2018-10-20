@@ -1,4 +1,4 @@
-FROM plugins/base:arm64
+FROM plugins/base:multiarch
 
 LABEL maintainer="Bo-Yi Wu <appleboy.tw@gmail.com>" \
   org.label-schema.name="Drone Packer" \
