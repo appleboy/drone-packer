@@ -14,7 +14,7 @@ pipeline:
     pull: true
     commands:
       - make vet
-      - make lint
+      - make revive
       - make test-vendor
       - make misspell-check
       - make test
