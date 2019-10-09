@@ -14,6 +14,7 @@ type (
 		Actions    []string
 		Vars       map[string]string
 		Template   string
+		Context    string
 		VarFiles   []string
 		SyntaxOnly bool
 		Except     []string
@@ -57,10 +58,15 @@ func pkValidate(config Config) *exec.Cmd {
 	}
 
 	args = append(args, config.Template)
-	return exec.Command(
+
+	cmd := exec.Command(
 		"packer",
 		args...,
 	)
+
+	cmd.Dir = config.Context
+
+	return cmd
 }
 
 func pkBuild(config Config) *exec.Cmd {
@@ -105,10 +111,15 @@ func pkBuild(config Config) *exec.Cmd {
 	}
 
 	args = append(args, config.Template)
-	return exec.Command(
+
+	cmd := exec.Command(
 		"packer",
 		args...,
 	)
+
+	cmd.Dir = config.Context
+
+	return cmd
 }
 
 // Exec executes the plugin.
