@@ -16,15 +16,6 @@ steps:
   - name: gopath
     path: /go
 
-- name: lint
-  pull: always
-  image: golang:1.13
-  commands:
-  - make lint
-  volumes:
-  - name: gopath
-    path: /go
-
 - name: misspell
   pull: always
   image: golang:1.13
