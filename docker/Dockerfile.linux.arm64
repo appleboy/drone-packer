@@ -9,7 +9,7 @@ ENV PACKER_VERSION 1.4.4
 ENV PACKER_ARCH arm64
 RUN wget -q https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_${PACKER_ARCH}.zip -O packer.zip && \
   unzip packer.zip -d /bin && \
-  rm -f packer.zi
+  rm -f packer.zip
 
 COPY release/linux/arm64/drone-packer /bin/
 
