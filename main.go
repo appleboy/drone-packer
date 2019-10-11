@@ -50,6 +50,12 @@ func main() {
 			Usage:  "Will execute multiple builds in parallel as defined in the template",
 			EnvVar: "PLUGIN_TEMPLATE",
 		},
+		cli.StringFlag{
+			Name:   "context",
+			Usage:  "The context directory path to use for executing `packer` command, defaults to root of the git repo",
+			Value:  ".",
+			EnvVar: "PLUGIN_CONTEXT",
+		},
 		cli.BoolFlag{
 			Name:   "syntax_only",
 			Usage:  "Only check syntax. Do not verify config of the template",
@@ -114,6 +120,7 @@ func run(c *cli.Context) error {
 			Actions:    c.StringSlice("actions"),
 			Vars:       vars,
 			Template:   c.String("template"),
+			Context:    c.String("context"),
 			VarFiles:   c.StringSlice("var_files"),
 			Except:     c.StringSlice("except"),
 			Only:       c.StringSlice("only"),
