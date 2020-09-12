@@ -9,7 +9,7 @@ platform:
 steps:
 - name: vet
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
   - make vet
   volumes:
@@ -18,7 +18,7 @@ steps:
 
 - name: misspell
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
   - make misspell-check
   volumes:
@@ -27,7 +27,7 @@ steps:
 
 - name: test
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
   - make test
   - make coverage
@@ -62,9 +62,9 @@ platform:
 steps:
 - name: build-push
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
-  - go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/amd64/drone-packer
+  - "go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/amd64/drone-packer"
   environment:
     CGO_ENABLED: 0
   when:
@@ -74,9 +74,9 @@ steps:
 
 - name: build-tag
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
-  - go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/amd64/drone-packer
+  - "go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/amd64/drone-packer"
   environment:
     CGO_ENABLED: 0
   when:
@@ -85,7 +85,7 @@ steps:
 
 - name: executable
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
   - ./release/linux/amd64/drone-packer --help
 
@@ -124,8 +124,8 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - refs/pull/**
-  - refs/tags/**
+  - "refs/pull/**"
+  - "refs/tags/**"
 
 depends_on:
 - testing
@@ -141,9 +141,9 @@ platform:
 steps:
 - name: build-push
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
-  - go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm64/drone-packer
+  - "go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm64/drone-packer"
   environment:
     CGO_ENABLED: 0
   when:
@@ -153,9 +153,9 @@ steps:
 
 - name: build-tag
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
-  - go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm64/drone-packer
+  - "go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm64/drone-packer"
   environment:
     CGO_ENABLED: 0
   when:
@@ -164,7 +164,7 @@ steps:
 
 - name: executable
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
   - ./release/linux/arm64/drone-packer --help
 
@@ -203,8 +203,8 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - refs/pull/**
-  - refs/tags/**
+  - "refs/pull/**"
+  - "refs/tags/**"
 
 depends_on:
 - testing
@@ -220,9 +220,9 @@ platform:
 steps:
 - name: build-push
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
-  - go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm/drone-packer
+  - "go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm/drone-packer"
   environment:
     CGO_ENABLED: 0
   when:
@@ -232,9 +232,9 @@ steps:
 
 - name: build-tag
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
-  - go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm/drone-packer
+  - "go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm/drone-packer"
   environment:
     CGO_ENABLED: 0
   when:
@@ -243,7 +243,7 @@ steps:
 
 - name: executable
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
   - ./release/linux/arm/drone-packer --help
 
@@ -282,8 +282,8 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - refs/pull/**
-  - refs/tags/**
+  - "refs/pull/**"
+  - "refs/tags/**"
 
 depends_on:
 - testing
@@ -299,7 +299,7 @@ platform:
 steps:
 - name: build-all-binary
   pull: always
-  image: golang:1.13
+  image: golang:1.15
   commands:
   - make release
   when:
@@ -313,14 +313,14 @@ steps:
     api_key:
       from_secret: github_release_api_key
     files:
-    - dist/release/*
+    - "dist/release/*"
   when:
     event:
     - tag
 
 trigger:
   ref:
-  - refs/tags/**
+  - "refs/tags/**"
 
 depends_on:
 - testing
@@ -348,7 +348,7 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - refs/tags/**
+  - "refs/tags/**"
 
 depends_on:
 - linux-amd64
