@@ -5,7 +5,7 @@ LABEL maintainer="Bo-Yi Wu <appleboy.tw@gmail.com>" \
   org.label-schema.vendor="Bo-Yi Wu" \
   org.label-schema.schema-version="1.0"
 
-ENV PACKER_VERSION 1.4.4
+ENV PACKER_VERSION 1.6.6
 ENV PACKER_ARCH arm
 RUN wget -q https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_${PACKER_ARCH}.zip -O packer.zip && \
   unzip packer.zip -d /bin && \
