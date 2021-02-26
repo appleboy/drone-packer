@@ -15,5 +15,5 @@ Drone plugin for build Automated machine images with [Packer](https://www.packer
 Build the binary with the following commands:
 
 ```sh
-go build
+make build
 ```
