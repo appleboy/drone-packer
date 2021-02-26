@@ -9,7 +9,7 @@ platform:
 steps:
 - name: vet
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - make vet
   volumes:
@@ -18,7 +18,7 @@ steps:
 
 - name: misspell
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - make misspell-check
   volumes:
@@ -27,7 +27,7 @@ steps:
 
 - name: test
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - make test
   - make coverage
@@ -62,7 +62,7 @@ platform:
 steps:
 - name: build-push
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - "go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/amd64/drone-packer"
   environment:
@@ -74,7 +74,7 @@ steps:
 
 - name: build-tag
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - "go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/amd64/drone-packer"
   environment:
@@ -85,7 +85,7 @@ steps:
 
 - name: executable
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - ./release/linux/amd64/drone-packer --help
 
@@ -141,7 +141,7 @@ platform:
 steps:
 - name: build-push
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - "go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm64/drone-packer"
   environment:
@@ -153,7 +153,7 @@ steps:
 
 - name: build-tag
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - "go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm64/drone-packer"
   environment:
@@ -164,7 +164,7 @@ steps:
 
 - name: executable
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - ./release/linux/arm64/drone-packer --help
 
@@ -220,7 +220,7 @@ platform:
 steps:
 - name: build-push
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - "go build -v -ldflags '-X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm/drone-packer"
   environment:
@@ -232,7 +232,7 @@ steps:
 
 - name: build-tag
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - "go build -v -ldflags '-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}' -a -o release/linux/arm/drone-packer"
   environment:
@@ -243,7 +243,7 @@ steps:
 
 - name: executable
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - ./release/linux/arm/drone-packer --help
 
@@ -299,7 +299,7 @@ platform:
 steps:
 - name: build-all-binary
   pull: always
-  image: golang:1.15
+  image: golang:1.16
   commands:
   - make release
   when:
