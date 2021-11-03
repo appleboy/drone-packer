@@ -110,7 +110,7 @@ func pkBuild(config Config) *exec.Cmd {
 		args = append(args, "-force")
 	}
 
-	initCmd := exec.Command(
+	exec.Command(
 		"packer",
 		"init",
 	)
@@ -123,7 +123,7 @@ func pkBuild(config Config) *exec.Cmd {
 
 	cmd.Dir = config.Context
 
-	return cmd + initCmd
+	return cmd
 }
 
 // Exec executes the plugin.
