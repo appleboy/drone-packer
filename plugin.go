@@ -113,6 +113,7 @@ func pkBuild(config Config) *exec.Cmd {
 	args = append(args, config.Template)
 
 	cmd := exec.Command(
+		"packer init;",
 		"packer",
 		args...,
 	)
