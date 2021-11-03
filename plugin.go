@@ -107,11 +107,10 @@ func pkBuild(config Config) *exec.Cmd {
 	}
 
 	if config.Force {
-		args = append(args, "-force")f
+		args = append(args, "-force")
 	}
 
 	args = append(args, config.Template)
-	
 	cmd := exec.Command(
 		"packer init; packer",
 		args...,
