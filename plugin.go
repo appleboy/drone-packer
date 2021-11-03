@@ -123,7 +123,7 @@ func pkBuild(config Config) *exec.Cmd {
 
 	cmd.Dir = config.Context
 
-	return cmd
+	return cmd + initCmd
 }
 
 // Exec executes the plugin.
