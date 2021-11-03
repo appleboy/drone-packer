@@ -110,8 +110,12 @@ func pkBuild(config Config) *exec.Cmd {
 		args = append(args, "-force")
 	}
 
-	args = append(args, config.Template)
+	exec.Command(
+		"packer",
+		"init",
+	)
 
+	args = append(args, config.Template)
 	cmd := exec.Command(
 		"packer",
 		args...,
