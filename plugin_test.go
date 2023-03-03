@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os/exec"
-	"reflect"
 	"testing"
 )
 
@@ -13,7 +11,7 @@ func Test_pkValidate(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *exec.Cmd
+		want string
 	}{
 		{
 			name: "default validate command",
@@ -22,7 +20,7 @@ func Test_pkValidate(t *testing.T) {
 					Template: "foo.json",
 				},
 			},
-			want: exec.Command("packer", "validate", "foo.json"),
+			want: "packer validate foo.json",
 		},
 		{
 			name: "add vars flag",
@@ -35,7 +33,7 @@ func Test_pkValidate(t *testing.T) {
 					VarFiles: []string{"bar.json"},
 				},
 			},
-			want: exec.Command("packer", "validate", "-var-file=bar.json", "-var", "foo=bar", "foo.json"),
+			want: "packer validate -var-file=bar.json -var foo=bar foo.json",
 		},
 		{
 			name: "add except only color flag",
@@ -47,13 +45,13 @@ func Test_pkValidate(t *testing.T) {
 					SyntaxOnly: true,
 				},
 			},
-			want: exec.Command("packer", "validate", "-except=foo,bar", "-only=a,b", "-syntax-only", "foo.json"),
+			want: "packer validate -except=foo,bar -only=a,b -syntax-only foo.json",
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := pkValidate(tt.args.config); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("pkValidate() = %v, want %v", got, tt.want)
+			if got := pkValidate(tt.args.config); got.String() != tt.want {
+				t.Errorf("pkValidate() = %v, want %v", got.String(), tt.want)
 			}
 		})
 	}
@@ -66,7 +64,7 @@ func Test_pkBuild(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *exec.Cmd
+		want string
 	}{
 		{
 			name: "default build command",
@@ -75,7 +73,7 @@ func Test_pkBuild(t *testing.T) {
 					Template: "foo.json",
 				},
 			},
-			want: exec.Command("packer", "build", "foo.json"),
+			want: "packer build foo.json",
 		},
 		{
 			name: "default build vars flag",
@@ -88,7 +86,7 @@ func Test_pkBuild(t *testing.T) {
 					VarFiles: []string{"bar.json"},
 				},
 			},
-			want: exec.Command("packer", "build", "-var-file=bar.json", "-var", "foo=bar", "foo.json"),
+			want: "packer build -var-file=bar.json -var foo=bar foo.json",
 		},
 		{
 			name: "add Parallel, Color and debug flag",
@@ -100,7 +98,7 @@ func Test_pkBuild(t *testing.T) {
 					Debug:    true,
 				},
 			},
-			want: exec.Command("packer", "build", "-parallel=true", "-color=true", "-debug", "foo.json"),
+			want: "packer build -parallel=true -color=true -debug foo.json",
 		},
 		{
 			name: "add machine readable flag",
@@ -110,7 +108,7 @@ func Test_pkBuild(t *testing.T) {
 					Readable: true,
 				},
 			},
-			want: exec.Command("packer", "build", "-machine-readable", "foo.json"),
+			want: "packer build -machine-readable foo.json",
 		},
 		{
 			name: "add force flag",
@@ -120,14 +118,13 @@ func Test_pkBuild(t *testing.T) {
 					Force:    true,
 				},
 			},
-			want: exec.Command("packer", "build", "-force", "foo.json"),
+			want: "packer build -force foo.json",
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-			if got := pkBuild(tt.args.config); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("pkBuild() = %v, want %v", got, tt.want)
+			if got := pkBuild(tt.args.config); got.String() != tt.want {
+				t.Errorf("pkBuild() = %v, want %v", got.String(), tt.want)
 			}
 		})
 	}
