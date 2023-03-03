@@ -32,6 +32,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: add command
+        run: |
+          apk add make
+
       - name: testing
         run: |
           make test
