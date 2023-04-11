@@ -13,7 +13,7 @@ ENV PACKER_ARCH ${TARGETARCH}
 RUN wget -q https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_${TARGETOS}_${PACKER_ARCH}.zip -O packer.zip && \
   unzip packer.zip -d /bin && \
   rm -f packer.zip
-RUN apk add --no-cache cdrkit && \
+RUN apk add --no-cache ca-certificates=20220614-r4 cdrkit=1.1.11-r4 && \
   rm -rf /var/cache/apk/*
 
 COPY release/${TARGETOS}/${TARGETARCH}/drone-packer /bin/
