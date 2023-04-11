@@ -129,3 +129,41 @@ func Test_pkBuild(t *testing.T) {
 		})
 	}
 }
+
+func Test_pkInit(t *testing.T) {
+	type args struct {
+		config Config
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "default command",
+			args: args{
+				config: Config{
+					Template: "aws-ubuntu.pkr.hcl",
+				},
+			},
+			want: "packer init aws-ubuntu.pkr.hcl",
+		},
+		{
+			name: "upgrade command",
+			args: args{
+				config: Config{
+					Template:  "aws-ubuntu.pkr.hcl",
+					IsUpgrade: true,
+				},
+			},
+			want: "packer init -upgrade aws-ubuntu.pkr.hcl",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := pkInit(tt.args.config); got.String() != tt.want {
+				t.Errorf("pkInit() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
