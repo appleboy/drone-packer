@@ -24,6 +24,7 @@ type (
 		Parallel   bool
 		Readable   bool
 		Force      bool
+		IsUpgrade  bool
 	}
 
 	// Plugin values
@@ -55,6 +56,27 @@ func pkValidate(config Config) *exec.Cmd {
 
 	if config.SyntaxOnly {
 		args = append(args, "-syntax-only")
+	}
+
+	args = append(args, config.Template)
+
+	cmd := exec.Command(
+		"packer",
+		args...,
+	)
+
+	cmd.Dir = config.Context
+
+	return cmd
+}
+
+func pkInit(config Config) *exec.Cmd {
+	args := []string{
+		"init",
+	}
+
+	if config.IsUpgrade {
+		args = append(args, "-upgrade")
 	}
 
 	args = append(args, config.Template)
@@ -138,6 +160,8 @@ func (p *Plugin) Exec() error {
 	// Add commands listed from Actions
 	for _, action := range p.Config.Actions {
 		switch action {
+		case "init":
+			commands = append(commands, pkInit(p.Config))
 		case "validate":
 			commands = append(commands, pkValidate(p.Config))
 		case "build":

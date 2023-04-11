@@ -86,6 +86,11 @@ func main() {
 			Usage:  "Force a build to continue if artifacts exist, deletes existing artifacts",
 			EnvVar: "PLUGIN_FORCE",
 		},
+		cli.BoolFlag{
+			Name:   "upgrade",
+			Usage:  "On top of installing missing plugins, update installed plugins to the latest available version",
+			EnvVar: "PLUGIN_UPGRADE",
+		},
 	}
 
 	app.Version = Version
@@ -130,6 +135,7 @@ func run(c *cli.Context) error {
 			Parallel:   c.Bool("parallel"),
 			Readable:   c.Bool("readable"),
 			Force:      c.Bool("force"),
+			IsUpgrade:  c.Bool("upgrade"),
 		},
 	}
 
