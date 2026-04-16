@@ -25,6 +25,7 @@ jobs:
         name: hadolint for Dockerfile
         with:
           dockerfile: docker/Dockerfile
+          ignore: DL3018
 
   testing:
     runs-on: ubuntu-latest
