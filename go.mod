@@ -1,6 +1,6 @@
 module github.com/appleboy/drone-packer
 
-go 1.20
+go 1.25.9
 
 require (
 	github.com/rs/zerolog v1.33.0
