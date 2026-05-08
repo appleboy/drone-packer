@@ -8,7 +8,7 @@ LABEL maintainer="Bo-Yi Wu <appleboy.tw@gmail.com>" \
   org.label-schema.vendor="Bo-Yi Wu" \
   org.label-schema.schema-version="1.0"
 
-ENV PACKER_VERSION=1.8.6
+ENV PACKER_VERSION=1.15.3
 ENV PACKER_ARCH=${TARGETARCH}
 RUN wget -q https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_${TARGETOS}_${PACKER_ARCH}.zip -O packer.zip && \
   unzip packer.zip -d /bin && \
