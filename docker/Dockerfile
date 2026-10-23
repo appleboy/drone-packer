@@ -1,5 +1,5 @@
 ARG BUILDPLATFORM
-FROM --platform=$BUILDPLATFORM golang:1.26.9-alpine AS packer-build
+FROM --platform=$BUILDPLATFORM golang:1.26.10-alpine AS packer-build
 
 ARG TARGETOS
 ARG TARGETARCH
