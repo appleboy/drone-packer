@@ -39,7 +39,7 @@ func pkValidate(config Config) *exec.Cmd {
 	}
 
 	for _, v := range config.VarFiles {
-		args = append(args, fmt.Sprintf("-var-file=%s", v))
+		args = append(args, "-var-file="+v)
 	}
 
 	for k, v := range config.Vars {
@@ -97,7 +97,7 @@ func pkBuild(config Config) *exec.Cmd {
 	}
 
 	for _, v := range config.VarFiles {
-		args = append(args, fmt.Sprintf("-var-file=%s", v))
+		args = append(args, "-var-file="+v)
 	}
 
 	for k, v := range config.Vars {
@@ -187,5 +187,9 @@ func (p *Plugin) Exec() error {
 }
 
 func trace(cmd *exec.Cmd) {
-	fmt.Println("$", strings.Join(cmd.Args, " "))
+	//nolint:forbidigo // Preserve the plugin CLI output format on stdout.
+	fmt.Println(
+		"$",
+		strings.Join(cmd.Args, " "),
+	)
 }
